@@ -7,6 +7,7 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { ReportComponent } from './report/report.component';
 import { StudentAddComponent } from './student-add/student-add.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component: StudentListComponent},
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

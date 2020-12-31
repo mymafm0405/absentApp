@@ -1,7 +1,8 @@
 import { StudentsService } from './../students.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Student } from '../student.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-report',
@@ -9,6 +10,7 @@ import { Student } from '../student.model';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
+  @ViewChild('f', {static: false}) searchForm: NgForm;
   currentDate: string;
   students: Student[] = [];
 
@@ -23,6 +25,10 @@ export class ReportComponent implements OnInit {
         console.log(this.students);
       }
     )
+  }
+
+  onSearch() {
+    console.log(this.searchForm.value.search);
   }
 
 }

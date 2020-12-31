@@ -16,7 +16,7 @@ export class StudentListComponent implements OnInit {
   savedSuccess = false;
   updateReport = false;
   viewStudent = false;
-  todayDate = this.today.getDate() + '-' + this.today.getMonth() + '-' + this.today.getFullYear();
+  todayDate = this.today.getFullYear() + '-' + this.today.getMonth() + '-' + this.today.getDate();
   constructor(private studentsService: StudentsService, private router: Router) { }
 
   ngOnInit(): void {
