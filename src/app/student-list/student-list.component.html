@@ -9,20 +9,47 @@
 <div class="row">
   <div class="col-md-12">
     <div *ngIf="currentStudents.length > 0 && viewStudent">
-      <div class="row student" *ngFor="let student of currentStudents; let i = index">
-        <div class="col-md-10">
-          <p>{{ student.name }}</p>
-        </div>
-        <div class="col-md-2">
-          <img (click)="onSwitchClick(i)" *ngIf="!student.status" src="../../assets/images/switch-off.png" alt="off"
-            class="img-responsive switch" width="50">
-          <img (click)="onSwitchClick(i)" *ngIf="student.status" src="../../assets/images/switch-on.png" alt="on"
-            class="img-responsive switch" width="50">
+      <div class="text-center">
+        <h2>كشف حضور و غياب طالبات</h2>
+        <h2>2D</h2>
+        <h4>اليوم: الأحد -- الموافق: 03-01-2021</h4>
+      </div>
+      <table class="table table-bordered">
+        <tr class="add-border">
+          <th class="add-border text-center">الغياب / الحضور</th>
+          <th class="add-border text-center">إسم الطالبة</th>
+        </tr>
+        <tr class="add-border text-center" *ngFor="let student of currentStudents; let i = index">
+          <td class="add-border">
+            <img
+              (click)="onSwitchClick(i)"
+              *ngIf="!student.status"
+              src="../../assets/images/switch-off.png"
+              alt="off"
+              class="img-responsive switch"
+              width="50"
+            />
+            <img
+              (click)="onSwitchClick(i)"
+              *ngIf="student.status"
+              src="../../assets/images/switch-on.png"
+              alt="on"
+              class="img-responsive switch"
+              width="50"
+            />
+          </td>
+          <td class="add-border">
+            <p>{{ student.name }}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="row" *ngIf="currentStudents.length === 0">
+      <div class="col-md-12">
+        <div class="alert alert-danger">
+          <h4>You don't have any students yet in your list</h4>
         </div>
       </div>
-    </div>
-    <div *ngIf="currentStudents.length === 0" class="alert alert-danger">
-      <h4>You don't have any students yet in your list</h4>
     </div>
   </div>
 </div>

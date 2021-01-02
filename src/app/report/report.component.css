@@ -2,3 +2,30 @@
   color: #666;
   font-style: italic;
 }
+tr th {
+  margin: 0;
+  padding: 0;
+}
+td {
+  margin: 0;
+  padding: 0;
+}
+.add-border {
+  border: 1px solid #666;
+}
+
+tr th {
+  padding: 10px;
+  font-size: 20px;
+}
+.next-name {
+  border-bottom: solid 1px #CCC;
+  margin: 0;
+  padding: 15px;
+}
+h2 {
+  color: #09F;
+}
+.absent {
+  color: red;
+}

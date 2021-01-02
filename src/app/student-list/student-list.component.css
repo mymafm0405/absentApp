@@ -9,3 +9,15 @@
 .btn {
   margin: 5px 5px;
 }
+
+.add-border {
+  border: 1px solid #666;
+}
+.img-responsive {
+  margin: 5px auto;
+}
+
+tr th {
+  padding: 10px;
+  font-size: 20px;
+}
