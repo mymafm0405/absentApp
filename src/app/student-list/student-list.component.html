@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-md-12 text-center">
     <h3 class="text-center">Students List</h3>
-    <h4 class="text-center">Date: {{ todayDate }}</h4>
     <button (click)="onNewDay()" class="btn btn-success">Today Report</button>
     <button (click)="onViewReport()" class="btn btn-info">Reports</button>
   </div>
@@ -10,9 +9,8 @@
   <div class="col-md-12">
     <div *ngIf="currentStudents.length > 0 && viewStudent">
       <div class="text-center">
-        <h2>كشف حضور و غياب طالبات</h2>
-        <h2>2D</h2>
-        <h4>اليوم: الأحد -- الموافق: 03-01-2021</h4>
+        <h2>تسجيل كشف الحضور والغياب</h2>
+        <h2 class="date">{{ todayDate }}</h2>
       </div>
       <table class="table table-bordered">
         <tr class="add-border">

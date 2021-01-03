@@ -21,3 +21,7 @@ tr th {
   padding: 10px;
   font-size: 20px;
 }
+.date {
+  color: #09F;
+  font-weight: bold;
+}

@@ -1,38 +1,43 @@
-<div class="row text-center">
-  <div class="col-md-12">
+<div class="row text-center search-form">
+  <div class="col-md-3">
     <a routerLink="/" class="btn btn-primary">Back to home</a>
   </div>
-</div>
-<hr />
-<div class="row text-center">
-  <div class="col-md-6 col-md-push-3">
+  <div class="col-md-9">
     <form (ngSubmit)="onSearch()" #f="ngForm">
-      <div class="form-group">
-        <label for="search"
-          >Search by date: <span class="example">ex: 12-24-2020</span></label
-        >
-        <input
-          id="search"
-          type="date"
-          class="form-control"
-          placeholder="Enter a date..."
-          name="search"
-          ngModel
-        />
+      <div class="row">
+        <div class="col-md-9">
+          <input id="search" type="date" class="form-control" placeholder="Enter a date..." name="search" ngModel />
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-success" type="submit">Search</button>
+        </div>
       </div>
-      <button class="btn btn-success" type="submit">Search</button>
     </form>
   </div>
 </div>
-<hr />
-<div class="row text-center" *ngIf="students.length > 0">
+<div class="row text-center title-back">
   <div class="col-md-12">
-    <div class="row">
+    <img src="../../assets/images/list.png" alt="list" class="img-responsive list">
+    <h2 class="date">{{ currentDate }}</h2>
+  </div>
+</div>
+<hr />
+<div class="row text-center my-table" *ngIf="students.length > 0">
+  <div class="col-md-12">
+    <div class="row text-center">
       <div class="col-md-6">
-        <h2>أسماء الغائبات</h2>
+        <img src="../../assets/images/sad.png" class="img-responsive face" width="100" />
       </div>
       <div class="col-md-6">
-        <h2>أسماء الحاضرات</h2>
+        <img src="../../assets/images/happy.png" class="img-responsive face" width="100" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h2>الطالبات الغائبات</h2>
+      </div>
+      <div class="col-md-6">
+        <h2>الطالبات الحاضرات</h2>
       </div>
     </div>
     <div class="row">

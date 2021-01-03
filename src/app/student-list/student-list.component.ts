@@ -11,16 +11,18 @@ import { Router } from '@angular/router';
 })
 export class StudentListComponent implements OnInit {
   currentStudents: Student[] = [];
-  today = new Date();
+  todayDate = '';
+  reports: Report[] = [];
+
   errorReportExist = false;
   savedSuccess = false;
   updateReport = false;
   viewStudent = false;
-  todayDate = this.today.getFullYear() + '-' + this.today.getMonth() + '-' + this.today.getDate();
   constructor(private studentsService: StudentsService, private router: Router) { }
 
   ngOnInit(): void {
     this.currentStudents = this.studentsService.getStudents();
+    this.getTodayDate();
   }
 
   onSwitchClick(index: number) {
@@ -30,24 +32,46 @@ export class StudentListComponent implements OnInit {
   onNewDay() {
     this.viewStudent = true;
     if (this.studentsService.checkReportExist(this.todayDate)) {
-      this.currentStudents = this.studentsService.getStudentsReport(this.todayDate);
+      this.studentsService.getStudentsReport(this.todayDate)
+      .subscribe(
+        (myData) => {
+          this.reports = myData;
+          console.log(this.reports);
+          const currentReport: Report = this.reports.find(report => report.date === this.todayDate);
+          if (currentReport) {
+            const currentStudents: Student[] = this.reports.find(report => report.date === this.todayDate).students;
+            this.currentStudents = currentStudents;
+          } else {
+            this.currentStudents = [];
+          }
+        }
+      );
     } else {
       this.currentStudents = this.studentsService.startNewDay();
     }
+  }
+
+  getTodayDate() {
+    const today = new Date();
+    this.todayDate = today.getFullYear() + '-' + (String(today.getMonth() + 1).padStart(2, '0')) + '-' + String(today.getDate()).padStart(2, '0');
   }
 
   onFinish() {
     const id: string = this.todayDate;
     const newReport: Report = new Report(id, this.todayDate, this.currentStudents);
     if (!this.studentsService.checkReportExist(this.todayDate)) {
-      this.studentsService.saveReport(newReport);
+      this.studentsService.saveReport(newReport).subscribe(
+        () => {
+          this.savedSuccess = true;
+          setTimeout(() => {
+            this.savedSuccess = false;
+          }, 2000);
+        }
+      );
       // this.viewStudent = false;
-      this.savedSuccess = true;
-      setTimeout(() => {
-        this.savedSuccess = false;
-      }, 2000);
-      console.log(this.studentsService.getReports());
+      // console.log(this.studentsService.getReports());
     } else {
+      // // I need to update the current report on database..please check here.
       this.studentsService.updateTodayReport(this.todayDate, this.currentStudents);
       this.updateReport = true;
       setTimeout(() => {

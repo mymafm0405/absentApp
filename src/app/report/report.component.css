@@ -29,3 +29,25 @@ h2 {
 .absent {
   color: red;
 }
+.date {
+  color: #09F;
+  font-weight: bold;
+  margin-top: 70px;
+}
+.face {
+  margin: 0 auto;
+}
+.list {
+  margin: 5px auto;
+}
+.my-table {
+  background-color: beige;
+  padding: 20px;
+}
+.search-form {
+  margin: 30px auto;
+  background-color: blanchedalmond;
+}
+.title-back {
+  background-color: cornsilk;
+}
