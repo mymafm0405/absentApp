@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 export class StudentsService {
   foundStatus: boolean;
   students: Student[] = [
-    new Student(1, 'Retaj Mahmoud', false),
-    new Student(1, 'Asmaa Fouad', false),
-    new Student(1, 'Basem Yhya', false)
+    // new Student('1', 'Retaj Mahmoud', false),
+    // new Student('2', 'Asmaa Fouad', false),
+    // new Student('3', 'Basem Yhya', false)
   ];
 
   reports: Report[] = [
@@ -22,8 +22,23 @@ export class StudentsService {
 
   constructor(private http: HttpClient) { }
 
+  addStudent(newStudent: Student) {
+    return this.http.post('https://absentsapp-default-rtdb.firebaseio.com/students.json', newStudent)
+  }
+
   getStudents() {
-    return this.students;
+    return this.http.get('https://absentsapp-default-rtdb.firebaseio.com/students.json')
+    .pipe(map(
+      (resData) => {
+        const data: Student[] = [];
+        for (const key in resData) {
+          if (resData.hasOwnProperty(key)) {
+            data.push({...resData[key], id: key})
+          }
+        }
+        return data;
+      }
+    ))
   }
 
   getReports() {
@@ -32,10 +47,7 @@ export class StudentsService {
   }
 
   startNewDay() {
-    for (let student of this.students) {
-      student.status = false;
-    }
-    return this.students;
+    return this.getStudents()
   }
 
   checkReportExist(date: string): boolean {
@@ -43,7 +55,6 @@ export class StudentsService {
     .subscribe(
       (myData) => {
         this.reports = myData;
-        console.log(this.reports);
         const currentReport: Report = this.reports.find(report => report.date === date);
         if (currentReport) {
           this.foundStatus = true;

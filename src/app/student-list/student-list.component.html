@@ -3,6 +3,28 @@
     <h3 class="text-center">Students List</h3>
     <button (click)="onNewDay()" class="btn btn-success">Today Report</button>
     <button (click)="onViewReport()" class="btn btn-info">Reports</button>
+    <button (click)="onAddStudent()" class="btn btn-info">Show/Hide Student Form</button>
+  </div>
+</div>
+<div class="row text-center stu-form" *ngIf="viewStuForm">
+  <div class="col-md-6 col-md-push-3">
+    <form (ngSubmit)="onAddStudentSubmit()" #stuForm="ngForm">
+      <div class="row">
+        <div class="col-md-9">
+          <input type="text" placeholder="Student name" class="form-control" name="stuName" ngModel required>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-danger" type="submit">Add student</button>
+        </div>
+      </div>
+      <div class="row" *ngIf="addedSuccessfully">
+        <div class="col-md-12">
+          <div class="alert alert-success">
+            <h4>Student added successfully!</h4>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 <div class="row">
@@ -51,7 +73,7 @@
     </div>
   </div>
 </div>
-<div class="row text-center" *ngIf="viewStudent">
+<div class="row text-center" *ngIf="currentStudents.length > 0 && viewStudent">
   <div class="col-md-12">
     <button (click)="onFinish()" class="btn btn-danger">Finish & Save</button>
     <div class="alert alert-success" *ngIf="savedSuccess">

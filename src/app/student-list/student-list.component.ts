@@ -1,8 +1,9 @@
 import { Report } from './../report.model';
 import { StudentsService } from './../students.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Student } from '../student.model';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-student-list',
@@ -10,23 +11,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
+  @ViewChild('stuForm', {static: false}) stuForm: NgForm;
   currentStudents: Student[] = [];
   todayDate = '';
   reports: Report[] = [];
 
+  addedSuccessfully = false;
   errorReportExist = false;
   savedSuccess = false;
   updateReport = false;
   viewStudent = false;
+  viewStuForm = false;
   constructor(private studentsService: StudentsService, private router: Router) { }
 
   ngOnInit(): void {
-    this.currentStudents = this.studentsService.getStudents();
-    this.getTodayDate();
+    this.getMyStudentsList();
+  }
+
+  getMyStudentsList() {
+    this.studentsService.getStudents()
+    .subscribe(
+      (stuData) => {
+        this.currentStudents = stuData;
+        console.log(this.currentStudents);
+        this.getTodayDate();
+      }
+    )
   }
 
   onSwitchClick(index: number) {
     this.currentStudents[index].status = !this.currentStudents[index].status;
+  }
+
+  onAddStudent() {
+    this.viewStuForm = !this.viewStuForm;
+  }
+  
+  onAddStudentSubmit() {
+    const fakeId = 'fake'
+    const stuName = this.stuForm.value.stuName;
+    const newStudent = new Student(fakeId, stuName, false);
+    this.studentsService.addStudent(newStudent).subscribe(
+      (res) => {
+        this.getMyStudentsList();
+        console.log(res);
+        this.addedSuccessfully = true;
+        setTimeout(() => {
+          this.addedSuccessfully = false;
+        }, 2000)
+      }
+    )
   }
 
   onNewDay() {
@@ -47,7 +81,15 @@ export class StudentListComponent implements OnInit {
         }
       );
     } else {
-      this.currentStudents = this.studentsService.startNewDay();
+      this.studentsService.startNewDay()
+      .subscribe(
+        (stuData) => {
+          for (let student of stuData) {
+            student.status = false;
+          }
+          this.currentStudents = stuData;
+        }
+      );
     }
   }
 
