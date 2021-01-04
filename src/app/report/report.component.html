@@ -26,7 +26,7 @@
 <div class="row text-center my-table" *ngIf="students.length > 0">
   <div class="col-md-12">
     <div class="row text-center">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <img
           src="../../assets/images/sad.png"
           class="img-responsive face"
@@ -34,16 +34,15 @@
         />
         <h2 class="list-title">الطالبات الغائبات</h2>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <img
-          src="../../assets/images/list.png"
+          src="../../assets/images/list2.png"
           alt="list"
           class="img-responsive list"
-          width="250"
         />
         <h2 class="date">{{ currentDate }}</h2>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <img
           src="../../assets/images/happy.png"
           class="img-responsive face"
@@ -53,13 +52,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div *ngFor="let stu of students">
           <h4 class="next-name absent" *ngIf="!stu.status">{{ stu.name }}</h4>
         </div>
       </div>
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
+      <div class="col-md-6"></div>
+      <div class="col-md-3">
         <div *ngFor="let stu of students">
           <h4 class="next-name present" *ngIf="stu.status">{{ stu.name }}</h4>
         </div>

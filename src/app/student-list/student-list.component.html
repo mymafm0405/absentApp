@@ -36,8 +36,8 @@
       </div>
       <table class="table table-bordered">
         <tr class="add-border">
-          <th class="add-border text-center">الغياب / الحضور</th>
-          <th class="add-border text-center">إسم الطالبة</th>
+          <th class="add-border text-center" style="font-size: 30px;">الغياب / الحضور</th>
+          <th class="add-border text-center" style="font-size: 30px;">إسم الطالبة</th>
         </tr>
         <tr class="add-border text-center" *ngFor="let student of currentStudents; let i = index">
           <td class="add-border">
@@ -59,7 +59,7 @@
             />
           </td>
           <td class="add-border">
-            <p>{{ student.name }}</p>
+            <h3>{{ student.name }}</h3>
           </td>
         </tr>
       </table>
