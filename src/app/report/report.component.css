@@ -27,12 +27,17 @@ h2 {
   color: #09F;
 }
 .absent {
-  color: red;
+  color: rgb(255, 0, 128);
+  font-weight: bold;
+}
+.present {
+  color: yellow;
+  font-weight: bold;
 }
 .date {
   color: #09F;
   font-weight: bold;
-  margin-top: 70px;
+  margin-top: 20px;
 }
 .face {
   margin: 0 auto;
@@ -41,7 +46,9 @@ h2 {
   margin: 5px auto;
 }
 .my-table {
-  background-color: beige;
+  background: url('../../assets/images/back2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 20px;
 }
 .search-form {
@@ -50,4 +57,11 @@ h2 {
 }
 .title-back {
   background-color: cornsilk;
+}
+.table-bordered {
+  border: 2px solid #333;
+}
+.list-title {
+  color: white;
+  font-weight: bold;
 }
